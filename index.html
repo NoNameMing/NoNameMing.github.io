@@ -4,7 +4,7 @@
 		<title>PAIN</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="css/StyleMode.css"/>
+		<link rel="stylesheet" type="text/css" href="css/StyleMode.css" />
 	</head>
 	<body>
 
@@ -39,7 +39,7 @@
 				<!-- <p>一些文本..</p> -->
 				<p>お前（まえ）たちは　この世界の主役だと思い上がり</p>
 				<!-- <br> -->
-<!-- 				<h2>JavaScript</h2>
+				<!-- 				<h2>JavaScript</h2>
 				<h5>Day 3</h5>
 				<div class="fakeimg" style="height:200px;">TESTING</div>
 				<!-- <p>一些文本..</p> -->
@@ -50,9 +50,25 @@
 		<div class="footer">
 			<h2>出かける。</h2>
 			<audio autoplay="autoplay" loop="loop" style="display:none">
-			<source src="PAIN.mp3" type="audio/mpeg"/>
+				<source src="PAIN.mp3" type="audio/mpeg" />
 			</audio>
 			<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="600" height="450" src="http://music.163.com/outchain/player?type=0&id=108250019&auto=1&height=430"></iframe></div></div></div>  -->
+			<script>
+				// 解决iOS禁止自动播放音频
+				// 微信自动播放音频
+				let bgAudio = document.getElementById('bg-audio');
+				bgAudio.play();
+				document.addEventListener("WeixinJSBridgeReady", function() {
+					bgAudio.play();
+				}, false);
+				// 其他应用在click/touch时触发播放
+				document.addEventListener('click', function() {
+					bgAudio.play()
+				})
+				document.addEventListener('touchstart', function() {
+					bgAudio.play()
+				})
+			</script>
 		</div>
 	</body>
 </html>
