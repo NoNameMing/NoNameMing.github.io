@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-image: url(/Users/wangxiaoming/Desktop/onlyto/img/background.jpg);
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    perspective: 1300px;
+}
+
+.day {
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translateX(-50%);
+    /* align-items: center; */
+}
+
+.hour {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+    /* align-items: center; */
+}
+
+.minute {
+    position: absolute;
+    left: 55%;
+    top: 50%;
+    transform: translateX(-50%);
+    /* align-items: center; */
+}
+
+.secound {
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    transform: translateX(-50%);
+    /* align-items: center; */
+}
