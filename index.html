@@ -1,75 +1,128 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="css/test2.css">
+<body>
+  <style>
+    h1{
+      font-size: 36px;
+      color: #B1BCE6;
+      font-family: '楷体';
+    }
+  </style>
+  <div>
+    <span id = 'd' class="day"><h1>0</h1></span>
+  </div>
+
+  <div>
+    <span id = 'h' class="hour">1</span>
+  </div>
+
+  <div>
+    <span id = 'm' class="minute">2</span>
+  </div>
+
+  <div>
+    <span id = 's' class="second">3</span>
+  </div>
+
+  <script>
+    // 指定日期
+    var day = document.querySelector(".day")
+    var hour = document.querySelector(".hour");
+    var minute = document.querySelector(".minute");
+    var second = document.querySelector(".second");
+    //获取截止时间的时间戳（单位毫秒）
+
+    var inputTime = +new Date("2023-06-11 00:00:00");
+
+    //先调用countDown函数，可以避免在打开界面后停一秒后才开始倒计时
+    countDown();
+    //定时器 每隔一秒变化一次
+    setInterval(countDown, 1000);
+
+    function countDown() {
+        //获取当前时间的时间戳（单位毫秒）
+        var nowTime = +new Date();
+        //把剩余时间毫秒数转化为秒
+        var times = (inputTime - nowTime) / 1000;
+        // 计算天数
+        var d = Math.trunc(parseInt(inputTime - nowTime) / (1000 * 3600 * 24));
+        //如果天数小于 10，要变成 0 + 数字的形式 赋值给盒子
+        day.innerHTML = d < 10 ? "0" + d : d;
+        //计算小时数 转化为整数
+        var h = parseInt(times / 60 / 60 % 24);
+        //如果小时数小于 10，要变成 0 + 数字的形式 赋值给盒子
+        hour.innerHTML = h < 10 ? "0" + h : h;
+        //计算分钟数 转化为整数
+        var m = parseInt(times / 60 % 60);
+        //如果分钟数小于 10，要变成 0 + 数字的形式 赋值给盒子
+        minute.innerHTML = m < 10 ? "0" + m : m;
+        //计算描述 转化为整数
+        var s = parseInt(times % 60);
+        //如果秒钟数小于 10，要变成 0 + 数字的形式 赋值给盒子
+        second.innerHTML = s < 10 ? "0" + s : s;
+    }
+  </script>
+
+</body>
+</html> -->
+
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>PAIN</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="css/StyleMode.css" />
-	</head>
-	<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counting Down</title>
+    <style>
+      #videofilm {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        z-index: -1;
+      }
+      h1{
+        /* font-size: 36px; */
+        /* color: #B1BCE6; */
+        /* font-family: '楷体'; */
+        position: absolute;
+        left: 50%;
+        /* top: 50%; */
+        bottom: 79%;
+        transform: translateX(-50%);
+        color: whitesmoke;
+        font-size: 39px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
 
-		<div class="header">
-			<h1>PAIN</h1>
-			<p>痛并努力着</p>
-		</div>
-
-		<div class="navbar">
-			<a href="pat.html">PAT</a>
-			<a href="leetcode.html">LEETCODE</a>
-			<a href="#">ALGORITHM</a>
-			<!-- <a href="#" class="right"></a> -->
-		</div>
-
-		<div class="row">
-			<div class="side">
-				<h2>NoNameMing'sBlog</h2>
-				<h3>小明的个人主页</h3>
-				<div class="fakeimg" style="height:200px;">我个人没有任何好说的，如果这里有你想看的东西你就看看吧。学习不易，共同进步。贵在坚持。</div>
-				<!-- <p>我个人没有任何好说的，如果这里有你想看的东西你就看看吧</p> -->
-				<h3>更多内容</h3>
-				<a href="test.html">正在开发中</a>
-				<!-- <div class="fakeimg" style="height:60px;">这边插入图像</div><br> -->
-				<!-- <div class="fakeimg" style="height:60px;">这边插入图像</div><br> -->
-				<!-- <div class="fakeimg" style="height:60px;">这边插入图像</div> -->
-				<a href=""></a>
-			</div>
-			<div class="main">
-				<h2>"We Start From Hello,World"</h2>
-				<!-- <h5>PATB 1046</h5> -->
-				<div class="fakeimg" style="height:200px;">欢迎欢迎，欢迎来小憩</div>
-				<!-- <p>一些文本..</p> -->
-				<p>お前（まえ）たちは　この世界の主役だと思い上がり</p>
-				<!-- <br> -->
-				<!-- 				<h2>JavaScript</h2>
-				<h5>Day 3</h5>
-				<div class="fakeimg" style="height:200px;">TESTING</div>
-				<!-- <p>一些文本..</p> -->
-				<!-- <p>死を远ざけて考える</p> -->
-			</div>
-		</div>
-
-		<div class="footer">
-			<h2>出かける。</h2>
-			<audio id="bg-audio" autoplay="autoplay" loop="loop" style="display:none">
-				<source src="PAIN.mp3" type="audio/mpeg" />
-			</audio>
-			<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="600" height="450" src="http://music.163.com/outchain/player?type=0&id=108250019&auto=1&height=430"></iframe></div></div></div>  -->
-			<script>
-				// 解决iOS禁止自动播放音频
-				// 微信自动播放音频
-				let bgAudio = document.getElementById('bg-audio');
-				bgAudio.play();
-				document.addEventListener("WeixinJSBridgeReady", function() {
-					bgAudio.play();
-				}, false);
-				// 其他应用在click/touch时触发播放
-				document.addEventListener('click', function() {
-					bgAudio.play()
-				})
-				document.addEventListener('touchstart', function() {
-					bgAudio.play()
-				})
-			</script>
-		</div>
-	</body>
+    </style>
+    <link rel="stylesheet" href="css/skystar.css">
+  </head>
+  <body>
+    <video id="videofilm" poster="img/background2.jpg" autoplay muted loop>
+      <!-- <source src="video/skystar.mp4" type="video/mp4"> -->
+    </video>
+    <div class="textzone">
+        <h1 class="">🎂生日</h1>
+        <span class="day" color="white">0</span> <strong>天:</strong>
+        <span class="hour">1</span> <strong>时:</strong>
+        <span class="minute">2</span> <strong>分:</strong>
+        <span class="second">3</span> <strong>秒</strong>
+    </div>
+    <script src="js/countdown.js"></script>
+    <!-- <div class="texttwo">
+      <h1>1</h1>
+    </div>
+    <div class="textthree">
+      <h1>2</h1>
+    </div>
+    <div class="textfour">
+      <h1>3</h1>
+    </div> -->
+    <audio src="video/晴天.mp3" autoplay loop></audio>
+    
+    <div class="container"></div>
+    
+    
+  </body>
 </html>
