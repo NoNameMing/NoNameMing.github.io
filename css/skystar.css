@@ -11,6 +11,20 @@ body {
     overflow: hidden;
     perspective: 1300px;
 }
+.button {
+    position: absolute;
+    left: 50%;
+    top: 110%;
+    transform: translateX(-50%);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    color: whitesmoke;
+    font-size: 39px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 .textzone {
     position: absolute;
     left: 50%;
@@ -75,18 +89,4 @@ animation-delay: var(--animation-delay);
         transform: rotateY(360deg);
     }
     
-}
-.button {
-    position: absolute;
-    left: 50%;
-    top: 110%;
-    transform: translateX(-50%);
-    background-color: Transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor:pointer;
-    overflow: hidden;
-    color: whitesmoke;
-    font-size: 39px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
