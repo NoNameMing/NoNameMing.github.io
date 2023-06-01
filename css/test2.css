@@ -45,3 +45,10 @@ body {
     transform: translateX(-50%);
     /* align-items: center; */
 }
+
+.button {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+}
