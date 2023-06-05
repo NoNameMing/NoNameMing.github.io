@@ -109,7 +109,7 @@ let textone = document.querySelector('.textone').querySelector('h1');
           textthree.style.fontFamily = '楷体';
           texttwo.innerHTML = '永远都是最好的扬';
           textthree.innerHTML = '💗';
-      },28000)
+      },50000)
       setTimeout(function(){
         textone.innerHTML = 'TESTING-STEP3-TEXT1';
         texttwo.innerHTML = 'TESTING-STEP3-TEXT2';
