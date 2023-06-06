@@ -111,9 +111,9 @@ let textone = document.querySelector('.textone').querySelector('h1');
           textthree.innerHTML = '💗';
       },50000)
       setTimeout(function(){
-        textone.innerHTML = 'TESTING-STEP3-TEXT1';
-        texttwo.innerHTML = 'TESTING-STEP3-TEXT2';
-        textthree.innerHTML = 'TESTING-STEP3-TEXT3';
+        textone.innerHTML = '一岁一礼，一寸欢喜';
+        texttwo.innerHTML = '岁岁春无事，相逢总玉颜';
+        textthree.innerHTML = 'From NONAMEMING. & SUNSHINE.';
       },112500)
 
 // function toggleSound() {

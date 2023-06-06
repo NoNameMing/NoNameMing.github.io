@@ -6,7 +6,7 @@
     //获取截止时间的时间戳（单位毫秒）
 
     // macOS适配版
-    var inputTime = +new Date("2023/06/05 23:25:00");
+    var inputTime = +new Date("2023/06/11 00:00:00");
 
     //先调用countDown函数，可以避免在打开界面后停一秒后才开始倒计时
     countDown();
@@ -25,8 +25,9 @@ function countDown() {
         document.getElementById("textzone2").style.visibility="";
         //隐藏
         document.getElementById("textzone").style.visibility="hidden";
-        // test显示 if 代码
-        // alert("NO");
+        // 跳转烟花页面
+        window.location.href="index_firework.html";
+
     } else {
         //显示
         document.getElementById("textzone2").style.visibility="hidden";

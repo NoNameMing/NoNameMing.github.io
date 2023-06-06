@@ -45,30 +45,13 @@
       <script src="./word.js"></script>
 
       <script>
-        {
-          const dom = document.querySelector('#fireworks')
-          const options = {}
-
-          const fireworks = new Fireworks(dom, options)
-          fireworks.start()
-
-          dom.addEventListener('click', (event) => {
-            fireworks.createFirework(event.offsetX, event.offsetY)
-          })
-        }
         
-        {
-          const dom = document.querySelector('#word')
-          const image = imageSrc
-          const word = new Word(dom, image)
-          word.start()
-        }
       </script>
     </div>
 
     <div class="textzone" id="textzone">
         <!-- 倒计时代码 -->
-        <!-- <h1 class="">🎂生日</h1> -->
+        <h1 class="">🎂生日</h1>
         <span class="day" color="white">00</span> <strong>天:</strong>
         <span class="hour">00</span> <strong>时:</strong>
         <span class="minute">00</span> <strong>分:</strong>
@@ -77,7 +60,7 @@
         <!-- <button class="button">Come On😊</button> -->
     </div>
     <script src="js/countdown.js"></script>
-    <audio src="video/花海.mp3" autoplay loop></audio>
+    <audio src="video/花海.mp3" autoplay></audio>
     
     <div class="container"></div>
   </body>
