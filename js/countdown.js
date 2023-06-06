@@ -6,7 +6,7 @@
     //获取截止时间的时间戳（单位毫秒）
 
     // macOS适配版
-    var inputTime = +new Date("2023/06/05 22:56:00");
+    var inputTime = +new Date("2023/06/05 23:25:00");
 
     //先调用countDown函数，可以避免在打开界面后停一秒后才开始倒计时
     countDown();

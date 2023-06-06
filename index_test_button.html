@@ -32,12 +32,43 @@
   <body>
     <video id="videofilm" poster="img/background2.jpg" autoplay muted loop>
     </video>
+
     <div class="textzone" id="textzone2">
-      <h1 class="">🎂 时间到啦</h1>
-      <button class="button">Come On😊</button>
+      <!-- 到时间后的代码 -->
+      <!-- <h1 class="">🎂</h1> -->
+      <!-- <button class="button">🎂</button> -->
+      <script src="./constants.js"></script>
+      <script src="./utils.js"></script>
+      <script src="./imageSrc.js"></script>
+      <script src="./tinycolor.js"></script>
+      <script src="./fireworks.js"></script>
+      <script src="./word.js"></script>
+
+      <script>
+        {
+          const dom = document.querySelector('#fireworks')
+          const options = {}
+
+          const fireworks = new Fireworks(dom, options)
+          fireworks.start()
+
+          dom.addEventListener('click', (event) => {
+            fireworks.createFirework(event.offsetX, event.offsetY)
+          })
+        }
+        
+        {
+          const dom = document.querySelector('#word')
+          const image = imageSrc
+          const word = new Word(dom, image)
+          word.start()
+        }
+      </script>
     </div>
+
     <div class="textzone" id="textzone">
-        <h1 class="">🎂杨扬生日</h1>
+        <!-- 倒计时代码 -->
+        <!-- <h1 class="">🎂生日</h1> -->
         <span class="day" color="white">00</span> <strong>天:</strong>
         <span class="hour">00</span> <strong>时:</strong>
         <span class="minute">00</span> <strong>分:</strong>
