@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      #videofilm {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        z-index: -1;
+      }
+      h1{
+        /* font-size: 36px; */
+        /* color: #B1BCE6; */
+        /* font-family: '楷体'; */
+        position: absolute;
+        left: 50%;
+        /* top: 50%; */
+        bottom: 79%;
+        transform: translateX(-50%);
+        color: whitesmoke;
+        font-size: 39px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+
+    </style>
+    <link rel="stylesheet" href="css/skystar.css">
+  </head>
+  <body>
+    <video id="videofilm" poster="img/background2.jpg" autoplay muted loop>
+    </video>
+    <div class="textzone">
+        <h1 class="">🎂杨扬生日</h1>
+        <span class="day" color="white">0</span> <strong>天:</strong>
+        <span class="hour">1</span> <strong>时:</strong>
+        <span class="minute">2</span> <strong>分:</strong>
+        <span class="second">3</span> <strong>秒</strong>
+        <span class="button">🌸Ver儿童节</span>
+        <button class="button">点击开启</button>
+    </div>
+    <script src="js/countdown.js"></script>
+    <audio src="video/晴天.mp3" autoplay loop></audio>
+    
+    <!-- <div class="container"></div> -->
+  </body>
+</html>

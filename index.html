@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>Counting Down</title>
     <style>
       #videofilm {
         width: 100%;
@@ -32,18 +32,36 @@
   <body>
     <video id="videofilm" poster="img/background2.jpg" autoplay muted loop>
     </video>
-    <div class="textzone">
-        <h1 class="">🎂杨扬生日</h1>
-        <span class="day" color="white">0</span> <strong>天:</strong>
-        <span class="hour">1</span> <strong>时:</strong>
-        <span class="minute">2</span> <strong>分:</strong>
-        <span class="second">3</span> <strong>秒</strong>
-        <span class="button">🌸Ver儿童节</span>
-        <button class="button">点击开启</button>
+
+    <div class="textzone" id="textzone2">
+      <!-- 到时间后的代码 -->
+      <!-- <h1 class="">🎂</h1> -->
+      <!-- <button class="button">🎂</button> -->
+      <script src="./constants.js"></script>
+      <script src="./utils.js"></script>
+      <script src="./imageSrc.js"></script>
+      <script src="./tinycolor.js"></script>
+      <script src="./fireworks.js"></script>
+      <script src="./word.js"></script>
+
+      <script>
+        
+      </script>
+    </div>
+
+    <div class="textzone" id="textzone">
+        <!-- 倒计时代码 -->
+        <h1 class="">🎂生日</h1>
+        <span class="day" color="white">00</span> <strong>天:</strong>
+        <span class="hour">00</span> <strong>时:</strong>
+        <span class="minute">00</span> <strong>分:</strong>
+        <span class="second">00</span> <strong>秒</strong>
+        <!-- <span class="button">🌸Ver儿童节</span> -->
+        <!-- <button class="button">Come On😊</button> -->
     </div>
     <script src="js/countdown.js"></script>
-    <audio src="video/晴天.mp3" autoplay loop></audio>
+    <audio src="video/晴天.mp3" autoplay></audio>
     
-    <!-- <div class="container"></div> -->
+    <div class="container"></div>
   </body>
 </html>
