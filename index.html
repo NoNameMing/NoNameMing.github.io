@@ -14,15 +14,20 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
         }
         #currentNumber {
-            font-size: 80px;
-            margin: 30px 0;
+            font-size: 48px;
+            margin: 20px 0;
             color: #2c3e50;
         }
         .button {
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 18px;
             background-color: #3498db;
             color: white;
             border: none;
@@ -34,7 +39,9 @@
             background-color: #2980b9;
         }
         #remaining {
+            font-size: 16px;
             color: #7f8c8d;
+            margin-bottom: 20px;
         }
         .number-list {
             display: flex;
@@ -44,14 +51,14 @@
             margin-top: 20px;
         }
         .number {
-            font-size: 20px;
+            font-size: 16px;
             padding: 5px 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #fff;
             text-align: center;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -63,6 +70,27 @@
         .number.picked::after {
             content: " ✕";
             color: red;
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+            }
+            #currentNumber {
+                font-size: 36px;
+            }
+            .button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .number {
+                font-size: 14px;
+                width: 25px;
+                height: 25px;
+            }
+            .number::after {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
