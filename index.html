@@ -1,15 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>没有星星的夜空，由我为你照亮</title>   
+    <title>随机抽号</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #currentNumber {
+            font-size: 80px;
+            margin: 30px 0;
+            color: #2c3e50;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        #remaining {
+            color: #7f8c8d;
+        }
+    </style>
 </head>
 <body>
-    <div class="main">
-        <canvas id="canvas"></canvas>
+    <h1>随机抽号 (1-160)</h1>
+    <input type="text" id="input" placeholder="按下回车键抽取号码" />
+    <div id="currentNumber">-</div>
+    <div id="remaining">剩余号码：160</div>
+
+    <script>
+        // 初始化：生成1-160的乱序数组
+        let numbers = Array.from({ length: 160 }, (_, i) => i + 1);
+        numbers.sort(() => Math.random() - 0.5); // 洗牌算法打乱顺序
+
+        const input = document.getElementById('input');
+        const currentNumber = document.getElementById('currentNumber');
+        const remaining = document.getElementById('remaining');
+
+        input.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                if (numbers.length > 0) {
+                    // 抽取第一个数字并移除
+                    const pickedNumber = numbers.shift();
+                    currentNumber.textContent = pickedNumber;
+                    remaining.textContent = `剩余号码：${numbers.length}`;
+                    
+                    // 简单动画效果
+                    currentNumber.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        currentNumber.style.transform = 'scale(1)';
+                    }, 200);
+                } else {
+                    currentNumber.textContent = "已抽完！";
+                    remaining.textContent = "";
+                    currentNumber.style.color = '#e74c3c';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
-<script src="script.js"></script>
