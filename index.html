@@ -20,50 +20,101 @@
             margin: 30px 0;
             color: #2c3e50;
         }
-        input {
-            padding: 10px;
+        .button {
+            padding: 10px 20px;
             font-size: 16px;
-            width: 300px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             margin-bottom: 20px;
+        }
+        .button:hover {
+            background-color: #2980b9;
         }
         #remaining {
             color: #7f8c8d;
+        }
+        .number-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .number {
+            font-size: 20px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .number.picked {
+            background-color: #ddd;
+            color: #777;
+        }
+        .number.picked::after {
+            content: " ✕";
+            color: red;
         }
     </style>
 </head>
 <body>
     <h1>随机抽号 (1-160)</h1>
-    <input type="text" id="input" placeholder="按下回车键抽取号码" />
+    <button class="button" id="drawButton">抽取号码</button>
     <div id="currentNumber">-</div>
     <div id="remaining">剩余号码：160</div>
+    <div class="number-list" id="numberList"></div>
 
     <script>
         // 初始化：生成1-160的乱序数组
         let numbers = Array.from({ length: 160 }, (_, i) => i + 1);
+        let originalNumbers = [...numbers]; // 保留原始顺序
         numbers.sort(() => Math.random() - 0.5); // 洗牌算法打乱顺序
 
-        const input = document.getElementById('input');
+        const drawButton = document.getElementById('drawButton');
         const currentNumber = document.getElementById('currentNumber');
         const remaining = document.getElementById('remaining');
+        const numberList = document.getElementById('numberList');
 
-        input.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                if (numbers.length > 0) {
-                    // 抽取第一个数字并移除
-                    const pickedNumber = numbers.shift();
-                    currentNumber.textContent = pickedNumber;
-                    remaining.textContent = `剩余号码：${numbers.length}`;
-                    
-                    // 简单动画效果
-                    currentNumber.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        currentNumber.style.transform = 'scale(1)';
-                    }, 200);
-                } else {
-                    currentNumber.textContent = "已抽完！";
-                    remaining.textContent = "";
-                    currentNumber.style.color = '#e74c3c';
+        // 初始化列表显示
+        originalNumbers.forEach(number => {
+            const div = document.createElement('div');
+            div.classList.add('number');
+            div.textContent = number;
+            div.dataset.number = number; // 添加数据属性
+            numberList.appendChild(div);
+        });
+
+        drawButton.addEventListener('click', () => {
+            if (numbers.length > 0) {
+                // 抽取第一个数字并移除
+                const pickedNumber = numbers.shift();
+                currentNumber.textContent = pickedNumber;
+                remaining.textContent = `剩余号码：${numbers.length}`;
+
+                // 更新列表显示
+                const pickedElement = document.querySelector(`.number[data-number="${pickedNumber}"]`);
+                if (pickedElement) {
+                    pickedElement.classList.add('picked');
                 }
+
+                // 简单动画效果
+                currentNumber.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    currentNumber.style.transform = 'scale(1)';
+                }, 200);
+            } else {
+                currentNumber.textContent = "已抽完！";
+                remaining.textContent = "";
+                currentNumber.style.color = '#e74c3c';
             }
         });
     </script>
