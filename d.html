@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>随机抽人</title>
     <style>
-        /* 通用样式 */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -16,7 +15,7 @@
             margin: 0;
             background-color: #f0f0f0;
             text-align: center;
-            padding: 10px; /* 为了避免元素紧贴边缘 */
+            padding: 10px; /* 避免内容被屏幕边缘覆盖 */
         }
 
         h1 {
@@ -24,7 +23,7 @@
             margin: 10px 0;
         }
 
-        #currentNumber {
+        #currentName {
             font-size: 48px;
             margin: 20px 0;
             color: #2c3e50;
@@ -40,7 +39,7 @@
             border-radius: 5px;
             cursor: pointer;
             margin-bottom: 20px;
-            max-width: 90%; /* 限制按钮最大宽度，防止超出屏幕 */
+            max-width: 90%; /* 限制按钮宽度，避免超出屏幕 */
         }
 
         .button:hover {
@@ -53,7 +52,7 @@
             margin-bottom: 20px;
         }
 
-        .number-list {
+        .name-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -63,26 +62,26 @@
             overflow-x: hidden; /* 防止横向滚动 */
         }
 
-        .number {
+        .name {
             font-size: 16px;
             padding: 5px 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #fff;
             text-align: center;
-            width: 30px;
+            width: 60px;
             height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .number.picked {
+        .name.picked {
             background-color: #ddd;
             color: #777;
         }
 
-        .number.picked::after {
+        .name.picked::after {
             content: " ✕";
             color: red;
             font-size: 14px;
@@ -94,7 +93,7 @@
                 font-size: 20px;
             }
 
-            #currentNumber {
+            #currentName {
                 font-size: 36px;
             }
 
@@ -103,30 +102,20 @@
                 font-size: 18px;
             }
 
-            .number {
+            .name {
                 font-size: 14px;
-                width: 28px;
-                height: 28px;
+                width: 45px;
+                height: 25px;
             }
 
-            .number-list {
-                justify-content: flex-start; /* 改为左对齐，避免过多空隙 */
-                overflow-x: scroll; /* 如果数字超出屏幕，可以横向滚动 */
+            .name::after {
+                font-size: 12px;
             }
-        }
 
-        /* 随机抽人链接 */
-        .random-draw-link {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 16px;
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .random-draw-link:hover {
-            text-decoration: underline;
+            .name-list {
+                justify-content: flex-start; /* 左对齐，避免数字过于分散 */
+                overflow-x: scroll; /* 如果数字过多，可以横向滚动 */
+            }
         }
     </style>
 </head>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>随机抽号</title>
     <style>
+        /* 通用样式 */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -15,41 +16,53 @@
             margin: 0;
             background-color: #f0f0f0;
             text-align: center;
+            padding: 10px; /* 为了避免元素紧贴边缘 */
         }
+
         h1 {
             font-size: 24px;
             margin: 10px 0;
         }
+
         #currentNumber {
             font-size: 48px;
             margin: 20px 0;
             color: #2c3e50;
+            transition: transform 0.2s ease;
         }
+
         .button {
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 12px 25px;
+            font-size: 20px;
             background-color: #3498db;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-bottom: 20px;
+            max-width: 90%; /* 限制按钮最大宽度，防止超出屏幕 */
         }
+
         .button:hover {
             background-color: #2980b9;
         }
+
         #remaining {
             font-size: 16px;
             color: #7f8c8d;
             margin-bottom: 20px;
         }
+
         .number-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
+            max-width: 100%;
+            overflow-x: hidden; /* 防止横向滚动 */
         }
+
         .number {
             font-size: 16px;
             padding: 5px 10px;
@@ -63,36 +76,46 @@
             align-items: center;
             justify-content: center;
         }
+
         .number.picked {
             background-color: #ddd;
             color: #777;
         }
+
         .number.picked::after {
             content: " ✕";
             color: red;
             font-size: 14px;
         }
+
+        /* 移动端优化 */
         @media (max-width: 600px) {
             h1 {
                 font-size: 20px;
             }
+
             #currentNumber {
                 font-size: 36px;
             }
+
             .button {
-                padding: 8px 16px;
-                font-size: 14px;
+                padding: 10px 20px;
+                font-size: 18px;
             }
+
             .number {
                 font-size: 14px;
-                width: 25px;
-                height: 25px;
+                width: 28px;
+                height: 28px;
             }
-            .number::after {
-                font-size: 12px;
+
+            .number-list {
+                justify-content: flex-start; /* 改为左对齐，避免过多空隙 */
+                overflow-x: scroll; /* 如果数字超出屏幕，可以横向滚动 */
             }
         }
-        /* 添加跳转链接的样式 */
+
+        /* 随机抽人链接 */
         .random-draw-link {
             position: absolute;
             top: 20px;
@@ -101,6 +124,7 @@
             color: #3498db;
             text-decoration: none;
         }
+
         .random-draw-link:hover {
             text-decoration: underline;
         }
@@ -113,8 +137,8 @@
     <div id="remaining">剩余号码：160</div>
     <div class="number-list" id="numberList"></div>
 
-    <!-- 添加跳转到随机抽人页面的链接 -->
-    <a href="random_draw.html" class="random-draw-link">随机抽人</a>
+    <!-- 跳转到随机抽人页面的链接 -->
+    <a href="d.html" class="random-draw-link">随机抽人</a>
 
     <script>
         // 初始化：生成1-160的乱序数组
