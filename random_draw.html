@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机抽人</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        #currentName {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        #remaining {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .name-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .name {
+            font-size: 16px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            text-align: center;
+            width: 60px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .name.picked {
+            background-color: #ddd;
+            color: #777;
+        }
+        .name.picked::after {
+            content: " ✕";
+            color: red;
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+            }
+            #currentName {
+                font-size: 36px;
+            }
+            .button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .name {
+                font-size: 14px;
+                width: 45px;
+                height: 25px;
+            }
+            .name::after {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>随机抽人</h1>
+    <button class="button" id="drawButton">抽取人名</button>
+    <div id="currentName">-</div>
+    <div id="remaining">剩余人数：100</div>
+    <div class="name-list" id="nameList"></div>
+
+    <script>
+        // 初始化：生成人名数组
+        let names = [
+            "高艳", "安晓慧", "曹亦然", "陈茜", "陈玉英", "葛鹏飞", "龚越", "郭清", "郭小渲", "韩丽琴",
+            "韩晴", "郝建玲", "何晶晶", "赫文叶", "胡晋卿", "贾计红", "焦尚武", "贾鹏宇", "贾新辉", "靳彩霞",
+            "井艳花", "靳连红", "雷霞", "雷叶", "梁伟民", "李冬梅", "李佳颖", "林可凤", "李攀", "李琪",
+            "刘慧敏", "刘佳敏", "刘静敏", "刘锦洲", "刘泰冉", "刘艳武", "刘志杰", "李蹊", "李霞", "李屹华",
+            "李瑛", "李荫亚", "李振忠", "卢婧", "马占绢", "穆晔峰", "牛秀文", "冉少东", "任守军", "沈文卿",
+            "沈媛媛", "宋鹏云", "睢家乐", "田宇", "王福财", "王戈", "王敏", "王鹏飞", "王清渊", "王晓凯",
+            "王晓亮", "王喜龙", "王亚东", "王雅菲", "王振民", "王智", "吴琼", "武霞", "吴晓慧", "武月",
+            "武玉梅", "谢立业", "徐澎", "许一凡", "杨静霞", "杨艳芳", "闫丽智", "岳小青", "翟艳慧", "张保泽",
+            "张华", "张慧玲", "张建胜", "张晶晶", "张瑞静", "张淑艳", "张婷婷", "张向芳", "张晓春", "张晓甜",
+            "张晓欣", "张晓燕", "张莹", "张宇超", "张志芳", "赵建钰", "赵文东", "赵雅洁", "赵月", "朱爱军"
+        ];
+        let originalNames = [...names]; // 保留原始顺序
+        names.sort(() => Math.random() - 0.5); // 洗牌算法打乱顺序
+
+        const drawButton = document.getElementById('drawButton');
+        const currentName = document.getElementById('currentName');
+        const remaining = document.getElementById('remaining');
+        const nameList = document.getElementById('nameList');
+        // 安排
+        const minGao = 1;
+        const maxGao = 3;
+        const minYang = 4;
+        const maxYang = 6;
+
+        let drawCount = 0; // 抽取次数计数器
+        let highYanDrawn = false; // 标记高艳是否已经被抽中
+        let yangJingXiaDrawn = false; // 标记杨静霞是否已经被抽中        
+        let highYanIndex = Math.floor(Math.random() * (maxGao - minGao + 1)) + minGao; // gao
+        let yangJingXiaIndex = Math.floor(Math.random() * (maxYang - minYang + 1)) + minYang; // yang
+
+        // 初始化列表显示
+        originalNames.forEach(name => {
+            const div = document.createElement('div');
+            div.classList.add('name');
+            div.textContent = name;
+            div.dataset.name = name; // 添加数据属性
+            nameList.appendChild(div);
+        });
+
+        drawButton.addEventListener('click', () => {
+            drawCount++;
+            if (names.length > 0) {
+                let pickedName;
+
+                // 检查是否需要强制抽取特定人名
+                if (drawCount === highYanIndex + 1 && !highYanDrawn) {
+                    pickedName = "高艳";
+                    highYanDrawn = true; // 高艳已经被抽中
+                } else if (drawCount === yangJingXiaIndex + 1 && !yangJingXiaDrawn) {
+                    pickedName = "杨静霞";
+                    yangJingXiaDrawn = true; // 杨静霞已经被抽中
+                } else {
+                    // 正常抽取其他人
+                    pickedName = names.shift();
+                }
+
+                currentName.textContent = pickedName;
+                remaining.textContent = `剩余人数：${names.length}`;
+
+                // 更新列表显示
+                const pickedElement = document.querySelector(`.name[data-name="${pickedName}"]`);
+                if (pickedElement) {
+                    pickedElement.classList.add('picked');
+                }
+
+                // 简单动画效果
+                currentName.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    currentName.style.transform = 'scale(1)';
+                }, 200);
+            } else {
+                currentName.textContent = "已抽完！";
+                remaining.textContent = "";
+                currentName.style.color = '#e74c3c';
+            }
+        });
+    </script>
+</body>
+</html>
