@@ -1,189 +1,129 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>随机抽号</title>
+    <title>情人节爱心</title>
     <style>
-        /* 通用样式 */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        * {
             margin: 0;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 10px; /* 为了避免元素紧贴边缘 */
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            font-size: 24px;
-            margin: 10px 0;
-        }
-
-        #currentNumber {
-            font-size: 48px;
-            margin: 20px 0;
-            color: #2c3e50;
-            transition: transform 0.2s ease;
-        }
-
-        .button {
-            padding: 12px 25px;
-            font-size: 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            max-width: 90%; /* 限制按钮最大宽度，防止超出屏幕 */
-        }
-
-        .button:hover {
-            background-color: #2980b9;
-        }
-
-        #remaining {
-            font-size: 16px;
-            color: #7f8c8d;
-            margin-bottom: 20px;
-        }
-
-        .number-list {
+        body {
+            background: #000;
+            overflow: hidden;
+            height: 100vh;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            max-width: 100%;
-            overflow-x: hidden; /* 防止横向滚动 */
-        }
-
-        .number {
-            font-size: 16px;
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #fff;
-            text-align: center;
-            width: 30px;
-            height: 30px;
-            display: flex;
             align-items: center;
-            justify-content: center;
         }
 
-        .number.picked {
-            background-color: #ddd;
-            color: #777;
+        .heart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            animation: heartbeat 1.2s infinite;
+            filter: drop-shadow(0 0 20px #ff0066);
         }
 
-        .number.picked::after {
-            content: " ✕";
-            color: red;
-            font-size: 14px;
-        }
-
-        /* 移动端优化 */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 20px;
-            }
-
-            #currentNumber {
-                font-size: 36px;
-            }
-
-            .button {
-                padding: 10px 20px;
-                font-size: 18px;
-            }
-
-            .number {
-                font-size: 14px;
-                width: 28px;
-                height: 28px;
-            }
-
-            .number-list {
-                justify-content: flex-start; /* 改为左对齐，避免过多空隙 */
-                overflow-x: scroll; /* 如果数字超出屏幕，可以横向滚动 */
-            }
-        }
-
-        /* 随机抽人链接 */
-        .random-draw-link {
+        .heart::before,
+        .heart::after {
+            content: '';
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 16px;
-            color: #3498db;
-            text-decoration: none;
+            width: 100px;
+            height: 160px;
+            background: linear-gradient(45deg, #ff0066, #ff0099);
+            border-radius: 100px 100px 0 0;
+            transform-origin: bottom;
         }
 
-        .random-draw-link:hover {
-            text-decoration: underline;
+        .heart::before {
+            left: 100px;
+            transform: rotate(-45deg);
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        .sparkles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <h1>随机抽号 (1-160)</h1>
-    <button class="button" id="drawButton">抽取号码</button>
-    <div id="currentNumber">-</div>
-    <div id="remaining">剩余号码：160</div>
-    <div class="number-list" id="numberList"></div>
-
-    <!-- 跳转到随机抽人页面的链接 -->
-    <a href="d.html" class="random-draw-link">随机抽人</a>
+    <div class="heart"></div>
+    <canvas class="sparkles"></canvas>
 
     <script>
-        // 初始化：生成1-160的乱序数组
-        let numbers = Array.from({ length: 160 }, (_, i) => i + 1);
-        let originalNumbers = [...numbers]; // 保留原始顺序
-        numbers.sort(() => Math.random() - 0.5); // 洗牌算法打乱顺序
+        const canvas = document.querySelector('.sparkles');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-        const drawButton = document.getElementById('drawButton');
-        const currentNumber = document.getElementById('currentNumber');
-        const remaining = document.getElementById('remaining');
-        const numberList = document.getElementById('numberList');
-
-        // 初始化列表显示
-        originalNumbers.forEach(number => {
-            const div = document.createElement('div');
-            div.classList.add('number');
-            div.textContent = number;
-            div.dataset.number = number; // 添加数据属性
-            numberList.appendChild(div);
-        });
-
-        drawButton.addEventListener('click', () => {
-            if (numbers.length > 0) {
-                // 抽取第一个数字并移除
-                const pickedNumber = numbers.shift();
-                currentNumber.textContent = pickedNumber;
-                remaining.textContent = `剩余号码：${numbers.length}`;
-
-                // 更新列表显示
-                const pickedElement = document.querySelector(`.number[data-number="${pickedNumber}"]`);
-                if (pickedElement) {
-                    pickedElement.classList.add('picked');
-                }
-
-                // 简单动画效果
-                currentNumber.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    currentNumber.style.transform = 'scale(1)';
-                }, 200);
-            } else {
-                currentNumber.textContent = "已抽完！";
-                remaining.textContent = "";
-                currentNumber.style.color = '#e74c3c';
+        class Particle {
+            constructor() {
+                this.reset();
             }
-        });
+            
+            reset() {
+                this.x = window.innerWidth/2 + Math.cos(Math.random() * Math.PI * 2) * 150;
+                this.y = window.innerHeight/2 + Math.sin(Math.random() * Math.PI * 2) * 150;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.radius = Math.random() * 2;
+                this.life = 1;
+                this.decay = 0.015;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+                if(this.life <= 0) this.reset();
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+                ctx.fillStyle = `rgba(255, 0, 102, ${this.life})`;
+                ctx.fill();
+            }
+        }
+
+        const particles = Array.from({length: 100}, () => new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
